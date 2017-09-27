@@ -1,6 +1,6 @@
 FROM php:5.6-apache
 
-ENV BLESTA_VERSION 4.1.1
+ENV BLESTA_VER 4.1.1
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
@@ -18,7 +18,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 	
 RUN wget -q -P /tmp http://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.zip \
-&& wget -q -P /tmp https://account.blesta.com/client/plugin/download_manager/client_main/download/97/blesta-${BLESTA_VERSION}.zip
+&& wget -q -P /tmp https://account.blesta.com/client/plugin/download_manager/client_main/download/97/blesta-${BLESTA_VER}.zip
 	
 RUN unzip /tmp/ioncube_loaders_lin_x86-64.zip -d /usr/local/lib/php/extensions/ && \
 	echo "zend_extension = /usr/local/lib/php/extensions/ioncube/ioncube_loader_lin_5.6.so" >  /usr/local/etc/php/conf.d/ioncube.ini
@@ -33,7 +33,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
 
 COPY config/php.ini /usr/local/etc/php/
 
-RUN unzip -d /var/www /tmp/blesta-${BLESTA_VERSION}.zip blesta/*
+RUN unzip -d /var/www /tmp/blesta-${BLESTA_VER}.zip blesta/*
 RUN unzip -d /tmp /tmp/blesta-${BLESTA_VERSION}.zip hotfix-php7/* \
     && cp -r /tmp/hotfix-php7/blesta/* /var/www/blesta
 
