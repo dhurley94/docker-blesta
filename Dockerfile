@@ -48,4 +48,4 @@ RUN rm /tmp/blesta-${BLESTA_VER}.zip \
     && rm -rf /tmp/hotfix-php7
 
 EXPOSE 80
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
