@@ -7,7 +7,7 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_DOCUMENT_ROOT /var/www/blesta
 
 RUN apt-get update \
-    && apt-get -y install wget unzip libpng-dev libgmp-dev \
+    && apt-get -y install wget unzip libpng-dev libgmp-dev libc-client-dev libkrb5-dev \
     && rm -rf /var/lib/apt/lists/*
 	
 RUN wget -q -P /tmp http://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.zip \
