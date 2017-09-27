@@ -2,6 +2,10 @@ FROM php:5.6-apache
 
 ENV BLESTA_VERSION 4.1.0
 
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_DOCUMENT_ROOT /var/www/blesta
+
 RUN apt-get update \
     && apt-get -y install wget unzip \
     && rm -rf /var/lib/apt/lists/*
@@ -16,8 +20,7 @@ RUN a2enmod rewrite
 RUN docker-php-ext-install pdo pdo_mysql
 
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VERSION}.zip blesta/*
-ENV APACHE_DOCUMENT_ROOT /var/www/blesta
-RUN echo ${APACHE_RUN_USER}
+
 RUN chown -R "${APACHE_RUN_USER}:${APACHE_RUN_GROUP}" "${APACHE_DOCUMENT_ROOT}";
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
