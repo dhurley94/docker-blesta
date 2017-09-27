@@ -32,7 +32,7 @@ RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
 
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VERSION}.zip blesta/*
 RUN unzip -d /tmp /tmp/blesta-${BLESTA_VERSION}.zip hotfix-php7/* \
-    && mv /tmp/hotfix-php7/blesta/* /var/www/blesta
+    && cp -r /tmp/hotfix-php7/blesta/* /var/www/blesta
 
 RUN chown -R "${APACHE_RUN_USER}:${APACHE_RUN_GROUP}" "${APACHE_DOCUMENT_ROOT}";
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
