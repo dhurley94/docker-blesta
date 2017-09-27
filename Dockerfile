@@ -18,7 +18,8 @@ RUN unzip /tmp/ioncube_loaders_lin_x86-64.zip -d /usr/local/lib/php/extensions/ 
 	
 RUN a2enmod rewrite
 
-RUN docker-php-ext-install pdo pdo_mysql gd gmp imap mcrypt
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+    && docker-php-ext-install pdo pdo_mysql gd gmp imap mcrypt
 
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VERSION}.zip blesta/*
 
