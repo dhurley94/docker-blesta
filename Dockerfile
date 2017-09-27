@@ -34,7 +34,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
 COPY config/php.ini /usr/local/etc/php/
 
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VER}.zip blesta/*
-RUN unzip -d /tmp /tmp/blesta-${BLESTA_VERSION}.zip hotfix-php7/* \
+RUN unzip -d /tmp /tmp/blesta-${BLESTA_VER}.zip hotfix-php7/* \
     && cp -r /tmp/hotfix-php7/blesta/* /var/www/blesta
 
 RUN chown -R "${APACHE_RUN_USER}:${APACHE_RUN_GROUP}" "${APACHE_DOCUMENT_ROOT}";
