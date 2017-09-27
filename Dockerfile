@@ -31,6 +31,8 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && pecl install mailparse-2.1.6 \
     && docker-php-ext-enable mailparse
 
+COPY config/php.ini /usr/local/etc/php/
+
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VERSION}.zip blesta/*
 RUN unzip -d /tmp /tmp/blesta-${BLESTA_VERSION}.zip hotfix-php7/* \
     && cp -r /tmp/hotfix-php7/blesta/* /var/www/blesta
