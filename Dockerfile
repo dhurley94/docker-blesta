@@ -9,6 +9,8 @@ ENV APACHE_DOCUMENT_ROOT /var/www/blesta
 RUN apt-get update \
     && apt-get -y install wget \
     unzip \
+    supervisor \
+    cron \
     libpng-dev \
     libgmp-dev \
     libc-client-dev \
@@ -46,4 +48,4 @@ RUN rm /tmp/blesta-${BLESTA_VER}.zip \
     && rm -rf /tmp/hotfix-php7
 
 EXPOSE 80
-CMD ["apache2-foreground"]
+CMD ["/usr/bin/supervisord"]
