@@ -17,6 +17,8 @@ RUN docker-php-ext-install pdo pdo_mysql
 
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VERSION}.zip blesta/*
 ENV APACHE_DOCUMENT_ROOT /var/www/blesta
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 RUN rm /tmp/blesta-${BLESTA_VERSION}.zip \
     && rm /tmp/ioncube_loaders_lin_x86-64.zip
