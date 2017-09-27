@@ -28,7 +28,7 @@ RUN a2enmod rewrite
 RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install pdo pdo_mysql gd gmp imap mcrypt \
-    && pecl install mailparse \
+    && pecl install mailparse-2.1.6 \
     && docker-php-ext-enable mailparse
 
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VERSION}.zip blesta/*
