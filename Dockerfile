@@ -25,7 +25,8 @@ RUN unzip /tmp/ioncube_loaders_lin_x86-64.zip -d /usr/local/lib/php/extensions/ 
 	
 RUN a2enmod rewrite
 
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
+    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install pdo pdo_mysql gd gmp imap mcrypt \
     && pecl install mailparse \
     && docker-php-ext-enable mailparse
