@@ -41,7 +41,7 @@ RUN chown -R "${APACHE_RUN_USER}:${APACHE_RUN_GROUP}" "${APACHE_DOCUMENT_ROOT}";
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-RUN rm /tmp/blesta-${BLESTA_VERSION}.zip \
+RUN rm /tmp/blesta-${BLESTA_VER}.zip \
     && rm /tmp/ioncube_loaders_lin_x86-64.zip \
     && rm -rf /tmp/hotfix-php7
 
