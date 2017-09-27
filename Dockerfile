@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7.0-apache
 
 ENV BLESTA_VERSION 4.1.0
 
@@ -17,7 +17,8 @@ RUN unzip /tmp/ioncube_loaders_lin_x86-64.zip -d /usr/local/lib/php/extensions/ 
 	echo "zend_extension = /usr/local/lib/php/extensions/ioncube/ioncube_loader_lin_5.6.so" >  /usr/local/etc/php/conf.d/ioncube.ini
 	
 RUN a2enmod rewrite
-RUN docker-php-ext-install pdo pdo_mysql gd gmp imap mailparse mcrypt
+
+RUN docker-php-ext-install pdo pdo_mysql gd gmp imap mcrypt
 
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VERSION}.zip blesta/*
 
