@@ -6,8 +6,8 @@ ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_DOCUMENT_ROOT /var/www/blesta
 
-RUN apt-get update \
-    && apt-get -y install wget \
+RUN apt-get -qq update \
+    && apt-get -y -qq install wget \
     unzip \
     supervisor \
     cron \
@@ -42,6 +42,8 @@ COPY config/supervisorctl.conf /etc/supervisor/conf.d/
 COPY config/apache2.conf /etc/supervisor/conf.d/
 
 COPY config/cron.conf /etc/supervisor/conf.d/
+COPY config/blesta-cron /etc/cron.d/
+RUN chmod 0644 /etc/cron.d/blesta-cron
 
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VER}.zip blesta/*
 RUN unzip -d /tmp /tmp/blesta-${BLESTA_VER}.zip hotfix-php7/* \
@@ -54,6 +56,9 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 RUN rm /tmp/blesta-${BLESTA_VER}.zip \
     && rm /tmp/ioncube_loaders_lin_x86-64.zip \
     && rm -rf /tmp/hotfix-php7
+
+VOLUME /var/www/blesta
+WORKDIR /var/www/blesta
 
 EXPOSE 80
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
