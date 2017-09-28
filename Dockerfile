@@ -42,6 +42,8 @@ COPY config/apache2.conf /etc/supervisor/conf.d/
 RUN echo "group=${APACHE_RUN_GROUP}" >> /etc/supervisor/conf.d/apache2.conf
 RUN echo "user=${APACHE_RUN_USER}" >> /etc/supervisor/conf.d/apache2.conf
 
+COPY config/cron.conf /etc/supervisor/conf.d/
+
 RUN unzip -d /var/www /tmp/blesta-${BLESTA_VER}.zip blesta/*
 RUN unzip -d /tmp /tmp/blesta-${BLESTA_VER}.zip hotfix-php7/* \
     && cp -r /tmp/hotfix-php7/blesta/* /var/www/blesta
