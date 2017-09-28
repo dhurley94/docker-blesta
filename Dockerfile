@@ -40,8 +40,6 @@ COPY config/supervisord.conf /etc/supervisor/supervisord.conf
 COPY config/supervisorctl.conf /etc/supervisor/conf.d/
 
 COPY config/apache2.conf /etc/supervisor/conf.d/
-RUN echo "group=${APACHE_RUN_GROUP}" >> /etc/supervisor/conf.d/apache2.conf
-RUN echo "user=${APACHE_RUN_USER}" >> /etc/supervisor/conf.d/apache2.conf
 
 COPY config/cron.conf /etc/supervisor/conf.d/
 
