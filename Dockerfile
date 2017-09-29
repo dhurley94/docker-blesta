@@ -17,7 +17,8 @@ RUN apt-get -qq update \
     libreadline-dev \
     && rm -rf /var/lib/apt/lists/*
 	
-RUN unzip /tmp/ioncube_loaders_lin_x86-64.zip -d /usr/local/lib/php/extensions/ \
+RUN wget -q -P /tmp http://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.zip \
+    && unzip /tmp/ioncube_loaders_lin_x86-64.zip -d /usr/local/lib/php/extensions/ \
     && echo "zend_extension = /usr/local/lib/php/extensions/ioncube/ioncube_loader_lin_5.6.so" >  /usr/local/etc/php/conf.d/ioncube.ini \
     && rm /tmp/ioncube_loaders_lin_x86-64.zip
 	
