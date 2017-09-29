@@ -20,4 +20,4 @@ RUN chmod +x install.sh
 RUN wget -q -P /tmp https://account.blesta.com/client/plugin/download_manager/client_main/download/97/blesta-${BLESTA_VER}.zip \
     && unzip /tmp/blesta-${BLESTA_VER}.zip
     
-CMD ['./install.sh']
+CMD ["/bin/bash","./install.sh"]
