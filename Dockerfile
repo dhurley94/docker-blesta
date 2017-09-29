@@ -26,6 +26,8 @@ RUN unzip /tmp/ioncube_loaders_lin_x86-64.zip -d /usr/local/lib/php/extensions/ 
 	echo "zend_extension = /usr/local/lib/php/extensions/ioncube/ioncube_loader_lin_5.6.so" >  /usr/local/etc/php/conf.d/ioncube.ini
 	
 RUN a2enmod rewrite
+RUN ln -sf /proc/self/fd/1 /var/log/apache2/access.log \
+    && ln -sf /proc/self/fd/1 /var/log/apache2/error.log
 
 RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
