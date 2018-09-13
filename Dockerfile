@@ -40,9 +40,13 @@ COPY config/supervisorctl.conf /etc/supervisor/conf.d/
 
 COPY config/apache2.conf /etc/supervisor/conf.d/
 
+# These three lines may not be needed
 COPY config/cron.conf /etc/supervisor/conf.d/
 COPY config/blesta-cron /etc/cron.d/
 RUN chmod 0644 /etc/cron.d/blesta-cron
+
+# ADJUSTED - cronjob
+RUN echo '*/5 * * * * www-data /usr/local/bin/php -q /var/www/html/index.php cron > /dev/null 2>&1' >> /etc/crontab
 
 RUN chown -R "${APACHE_RUN_USER}:${APACHE_RUN_GROUP}" "${APACHE_DOCUMENT_ROOT}";
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
@@ -52,8 +56,11 @@ WORKDIR /var/www
 RUN curl https://account.blesta.com/client/plugin/download_manager/client_main/download/116/blesta-4.3.2.zip > blesta.zip \
     && unzip blesta.zip \
     && mv /var/www/blesta/* /var/www/html \
-    && mv /var/www/blesta/.htaccess /var/www/html \
-    && chown -R www-data:www-data /var/www/html
+    && mv /var/www/blesta/.htaccess /var/www/html 
+
+RUN mkdir /var/www/logs_blesta \
+    && mkdir /var/www/uploads_blesta \
+    && chown -R www-data:www-data /var/www 
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
