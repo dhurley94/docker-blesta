@@ -56,11 +56,14 @@ WORKDIR /var/www
 RUN curl https://account.blesta.com/client/plugin/download_manager/client_main/download/116/blesta-4.3.2.zip > blesta.zip \
     && unzip blesta.zip \
     && mv /var/www/blesta/* /var/www/html \
-    && mv /var/www/blesta/.htaccess /var/www/html 
-
-RUN mkdir /var/www/logs_blesta \
+    && mv /var/www/blesta/.htaccess /var/www/html \
+    && mkdir /var/www/logs_blesta \
     && mkdir /var/www/uploads_blesta \
     && chown -R www-data:www-data /var/www 
+
+RUN curl https://www.coinpayments.net/downloads/blesta_coinpayments.zip > /var/www/coinpayments.zip \
+    && unzip coinpayments.zip \
+    && mv /var/www/coin_payments /var/www/html/components/gateways/nonmerchant/
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
