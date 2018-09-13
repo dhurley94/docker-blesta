@@ -51,7 +51,9 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 WORKDIR /var/www
 RUN curl https://account.blesta.com/client/plugin/download_manager/client_main/download/116/blesta-4.3.2.zip > blesta.zip \
     && unzip blesta.zip \
-    && mv /var/www/blesta/* /var/www/html
+    && mv /var/www/blesta/* /var/www/html \
+    && mv /var/www/blesta/.htaccess /var/www/html \
+    && chown -R www-data:www-data /var/www/html
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
