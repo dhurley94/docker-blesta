@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7.1-apache
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
@@ -19,7 +19,7 @@ RUN apt-get -qq update \
 
 RUN wget -q -P /tmp http://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.zip \
     && unzip /tmp/ioncube_loaders_lin_x86-64.zip -d /usr/local/lib/php/extensions/ \
-    && echo "zend_extension = /usr/local/lib/php/extensions/ioncube/ioncube_loader_lin_5.6.so" >  /usr/local/etc/php/conf.d/ioncube.ini \
+    && echo "zend_extension = /usr/local/lib/php/extensions/ioncube/ioncube_loader_lin_7.1.so" >  /usr/local/etc/php/conf.d/ioncube.ini \
     && rm /tmp/ioncube_loaders_lin_x86-64.zip
 
 RUN a2enmod rewrite
