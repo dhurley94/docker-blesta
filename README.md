@@ -2,10 +2,7 @@
 
 Blesta Panel for Docker
 
-## dhurley
+## dhurley - changes
 
-Added latest version of blesta to isntall and also exposed ports 80, 443, 3306
-
-### TODO
-
-Modify for PHP7.1 and use Nginx + FPM stack vs PHP5.6 + Apache
+PHP 7.1 & Apache
+Exposed ports 80, 443, 3306
